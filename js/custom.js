@@ -60,7 +60,7 @@ $(function () {
     /* typejs
     -------------------------------------------------------*/
     $(' .typed-element').typed({
-        strings: ["Magician", "Ui/Ux Designer", "Photographer"],
+        strings: ["Game Programer ", "Software Developer "],
         loop: true,
         startDelay: 1000,
         backDelay: 2000
