@@ -444,7 +444,7 @@ $(window).on("load", function () {
         }];
 
         var mapOptions = {
-            center: new google.maps.LatLng(23.7647301, 90.3567407),
+            center: new google.maps.LatLng(49.282730, -123.120735),
             zoom: 12,
             scrollwheel: false,
             panControl: true,
@@ -462,7 +462,7 @@ $(window).on("load", function () {
             var bounds = new google.maps.LatLngBounds();
             var myIcon = new google.maps.MarkerImage("img/marker-pin.svg", null, null, null, new google.maps.Size(50, 62));
             var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(23.7647301, 90.3567407),
+                position: new google.maps.LatLng(49.282730, -123.120735),
                 map: map,
                 icon: myIcon
             });
