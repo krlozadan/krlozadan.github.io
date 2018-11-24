@@ -12,7 +12,7 @@
         target = {x: 0, y: height};
 
         largeHeader = document.getElementById('bg-effect');
-        largeHeader.style.height = height+'px';
+        if (largeHeader != null) largeHeader.style.height = height+'px';
 
         canvas = document.getElementById('background-effect');
         canvas.width = width;
