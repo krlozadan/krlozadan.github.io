@@ -76,7 +76,8 @@ $(function () {
         items: 1,
         mouseDrag: true,
         autoplay: true,
-        smartSpeed: 500
+        smartSpeed: 500,
+        loop : true
 
     });
 
@@ -87,7 +88,9 @@ $(function () {
         items: 1,
         mouseDrag: true,
         autoplay: true,
-        smartSpeed: 500
+        smartSpeed: 500,
+        loop : true,
+        nav : true
 
     });
 
@@ -119,7 +122,8 @@ $(function () {
                 nav: false,
                 loop: false
             }
-        }
+        },
+        loop : true
     });
 
 
@@ -149,14 +153,9 @@ $(function () {
                 nav: false,
                 loop: false
             }
-        }
+        },
+        loop : true
     });
-
-
-
-
-
-
 
 
     $('.img-pop').magnificPopup({
