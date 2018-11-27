@@ -5,15 +5,15 @@
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>Space Invaders Project</title>
-	<!-- TODO: Add meta description -->
+	<title>Pong Project</title>
+	<meta name="description" content="C++ retro game clone made">
 
 	<!-- Bootstrap CSS -->
 	<link href="https://www.carlosadan.com/css/bootstrap.min.css" rel="stylesheet">
 	<!-- Font Awesome -->
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-	<!-- Highlight JS -->
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/default.min.css">
+	<!-- Prism JS -->
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/atom-one-dark.min.css">
 	<!-- Google Font -->
 	<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700,900" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
@@ -82,7 +82,7 @@
 	<div class="port-hero overlay">
 		<div class="container">
 			<div class="col-md-12">
-				<h2>Space Invaders</h2>
+				<h2>Pong</h2>
 				<div class="breadcroumb">
 					Retro
 				</div>
@@ -96,16 +96,10 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="owl-carousel owl-theme">
-						<!-- Item Client 1-->
 						<div class="item-portfolio">
-							<img src="https://www.carlosadan.com/img/portfolio/space-invaders-gameplay.jpg" alt="Space Invaders Gameplay" />
-						</div>
-						<!-- Item Client 2-->
-						<div class="item-portfolio">
-                                <img src="https://www.carlosadan.com/img/portfolio/space-invaders-main-screen.jpg" alt="Space Invaders Main Screen" />
+							<img src="https://www.carlosadan.com/img/portfolio/pong-game-gameplay.jpg" alt="Pong Gameplay" />
 						</div>
 					</div>
-					<!-- Controls -->
 				</div>
 				<div class="col-md-6">
 					<div class="project-meta-wrapper">
@@ -121,16 +115,16 @@
 								<i class="fa fa-desktop"></i><span>Software:</span> Visual Studio 2017
 							</li>
 							<li>
-								<i class="fa fa-code"></i><span>Languages:</span> C#
+								<i class="fa fa-code"></i><span>Languages:</span> C++
 							</li>
 							<li>
-								<i class="fa fa-link"></i><span>Download link:</span> <a href="https://www.dropbox.com/s/17bmx6vr338rlak/SpaceInvaders.zip?dl=0" target="_blank">Play Game</a>
+								<i class="fa fa-link"></i><span>Download link:</span> <a href="https://www.dropbox.com/s/mblc46j0lbg51oa/Pong.zip?dl=0" target="_blank">Play Game</a>
 							</li>
 						</ul>
 						<div class="project-info">
 							<h4 class="sub-tit">A Short Brief</h4>
 							<p>
-                                This is a Space Invaders clone I did while learning the basics of C# programming. The main takeways were getting to know how the main loop works in game programming and practice Object Oriented programming principles during development.
+								This retro game clone was a very interesting project to work on because I did two iterations on it. The first one using an object oriented approach with high emphasis on how classes were related to each other. The second one was using a component-based system to build independent and interchangeable modules.
 							</p>
 						</div>
 					</div>
@@ -142,11 +136,165 @@
                             The main challenges and achievements of the project were:
                         </p>
                         <ul>
-                            <li>- Simulate a delta time in the console to make thinks move on screen and create the game loop</li>
-                            <li>- Design the class architecture that best suited the game</li>
-                            <li>- Program a shared bullet system that could be used by any the player and the enemies</li>
-                            <li>- Develop the AI for the enemy fleet which involved movement and shooting behavior</li>
-                        </ul>
+							<li>- Implement a Component Base System to drive all game logic by analyzing every object and abstracting its properties and behavours</li>
+							<li>- Calculate the collision between a circle and a box to determine the ball's bounce direction</li>
+							<li>- Use pure virtual functions to create en event-driven system to connect game entities, i.e. physics component with bounce component</li>
+						</ul>
+						<div id="accordion">
+							<div class="card">
+								<div class="card-header" id="headingOne">
+									<h5 class="mb-0">
+										<button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+											Game Object Class
+										</button>
+									</h5>
+								</div>
+								<div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+									<div class="card-body">
+										<pre><code class="cpp">
+class GameObject
+{
+private:
+	std::vector<Component*> mComponents;
+
+public:
+	GameObject() {}
+	~GameObject() 
+	{
+		for (Component* pComponent : mComponents)
+		{
+			pComponent->Destroy();
+			delete pComponent;
+		}
+	}
+
+	void Initialize()
+	{
+		for (Component* pComponent : mComponents)
+		{
+			pComponent->Initialize();
+		}
+	}
+
+	void AddComponent(Component* pComponent)
+	{
+		mComponents.push_back(pComponent);
+	}
+
+	template&lt;class T>
+	T* FindComponent(ComponentType eType)
+	{
+		for (Component* pComponent : mComponents)
+		{
+			if (pComponent->GetType() == eType)
+			{
+				return (T*)pComponent;
+			}
+		}
+
+		return nullptr;
+	}
+};
+										</code></pre>
+									</div>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" id="headingOne">
+									<h5 class="mb-0">
+										<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+											Component Class
+										</button>
+									</h5>
+								</div>
+								<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+									<div class="card-body">
+										<pre><code class="c++">
+	class Component
+	{
+	public:
+		Component(GameObject* pGO): mGO(pGO) {}
+		~Component() {}
+	
+		virtual ComponentType GetType() const = 0;
+		virtual void Initialize() {}
+		virtual void Destroy() {}
+	
+		GameObject* GetGameObject() const { return mGO; }
+	
+	protected:
+		GameObject* mGO;
+	
+		template&lt;class T>
+		void AddToComponentVector(std::vector<T*>& componentVector)
+		{
+			componentVector.push_back((T*)this);
+		}
+	
+		template&lt;class T>
+		void RemoveFromComponentVector(std::vector<T*>& componentVector)
+		{
+			componentVector.erase(std::remove(componentVector.begin(), componentVector.end(), this), componentVector.end());
+		}
+	};
+										</code></pre>
+									</div>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" id="headingOne">
+									<h5 class="mb-0">
+										<button class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+											Bounce Component Class
+										</button>
+									</h5>
+								</div>
+								<div id="collapseThree" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+									<div class="card-body">
+										<pre><code class="cpp">
+class COGBounce : public Component, public IPhysicsCollisionEvent
+{
+public:
+
+	static std::vector&lt;COGBounce*> mBounceComponents;
+
+	COGBounce(GameObject* pGO) : Component(pGO) {}
+	~COGBounce() {}
+
+	virtual ComponentType GetType() const { return ComponentType::Bounce; }
+
+	virtual void Initialize() override
+	{
+		AddToComponentVector(mBounceComponents);
+		// Registers itself to the collision events
+		mGO->FindComponent&lt;COGPhysics>(ComponentType::Physics)->AddListener(this);
+	}
+
+	virtual void Destroy() override 
+	{
+		RemoveFromComponentVector(mBounceComponents);
+	}
+
+	virtual void OnCollision(COGPhysics* pMe, COGPhysics* pOther, exCollision collision) override 
+	{	
+		// Changes the velocity of the ball so it bounces off the surfaces
+		exVector2& velocity = pMe->GetVelocity();
+
+		float transformation = 2 * (velocity.x * collision.normalX + velocity.y * collision.normalY);
+		collision.normalX *= transformation;
+		collision.normalY *= transformation;
+		
+		velocity.x -= collision.normalX;
+		velocity.y -= collision.normalY;
+	}
+};
+// Init static vector
+std::vector&lt;COGBounce*> COGBounce::mBounceComponents;
+										</code></pre>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="single-project-link">
 						<a href="https://www.carlosadan.com/#portfolio" class="project-link prev-project"><i class="fa fa-angle-left"> back to projects</i></a>
@@ -212,6 +360,7 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
 	<!-- custom JavaScript -->
 	<script src="https://www.carlosadan.com/js/custom.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
 </body>
 
 </html>
