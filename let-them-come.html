@@ -5,8 +5,8 @@
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>Pong Project</title>
-	<meta name="description" content="C++ Pong retro game clone">
+	<title>Let Them Come Project</title>
+	<meta name="description" content="C++ Let Them Come game clone">
 
 	<!-- Bootstrap CSS -->
 	<link href="./css/bootstrap.min.css" rel="stylesheet">
@@ -82,7 +82,7 @@
 	<div class="port-hero overlay">
 		<div class="container">
 			<div class="col-md-12">
-				<h2>Pong</h2>
+				<h2>Let Them Come</h2>
 				<div class="breadcroumb">
 					Retro
 				</div>
@@ -97,7 +97,13 @@
 				<div class="col-md-6">
 					<div class="owl-carousel owl-theme">
 						<div class="item-portfolio">
-							<img src="./img/portfolio/pong-game-gameplay.jpg" alt="Pong Gameplay" />
+							<img src="./img/portfolio/let-them-come-weapon-1.jpg" alt="Missile Command Weapon 1" />
+						</div>
+						<div class="item-portfolio">
+							<img src="./img/portfolio/let-them-come-weapon-2.jpg" alt="Missile Command Weapon 2" />
+						</div>
+						<div class="item-portfolio">
+							<img src="./img/portfolio/let-them-come-weapon-3.jpg" alt="Missile Command Weapon 3" />
 						</div>
 					</div>
 				</div>
@@ -118,13 +124,13 @@
 								<i class="fa fa-code"></i><span>Languages:</span> C++
 							</li>
 							<li>
-								<i class="fa fa-link"></i><span>Download link:</span> <a href="https://www.dropbox.com/s/mblc46j0lbg51oa/Pong.zip?dl=0" target="_blank">Play Game</a>
+								<i class="fa fa-link"></i><span>Download link:</span> <a href="https://www.dropbox.com/s/xre7aidr2lldr8m/LetThemCome.zip?dl=0" target="_blank">Play Game</a>
 							</li>
 						</ul>
 						<div class="project-info">
 							<h4 class="sub-tit">A Short Brief</h4>
 							<p>
-								Using <a href="https://www.linkedin.com/in/james-mansfield-69a7575/" target="_blank">James Mansfield's</a> 2D engine. This retro game clone was a very interesting project to work on because I did two iterations on it. The first one using an object oriented approach with high emphasis on how classes were related to each other. The second one was using a <strong>component-based system</strong> to build independent and interchangeable modules.
+								This is was an exercise utilizing the component base system from <a href="./pong.html">Pong</a>, the hash-map implementation from <a href="./missile-command.html">Missile Command</a> and implementing a <strong>Finite State Machine</strong> to control the behavior of the weapon you use to destroy the aliens (if you can call aliens the green circles at the bottom).
 							</p>
 						</div>
 					</div>
@@ -136,65 +142,88 @@
                             The main challenges and achievements of the project were:
                         </p>
                         <ul>
-							<li>- Implement a Component Base System to drive all game logic by analyzing every object and abstracting its properties and behavours</li>
-							<li>- Calculate the collision between a circle and a box to determine the ball's bounce direction</li>
-							<li>- Use pure virtual functions to create en event-driven system to connect game entities, i.e. physics component with bounce component</li>
+							<li>- Understand and implement a Finite State Machine to control the status of the player weapon</li>
+							<li>- Use different math formulas to create the behavior of the 3 different weapon states</li>
+							<li>- Utilize different systems in conjunction to create a robust game system to speed up development process and allow rapid prototyping</li>
 						</ul>
 						<div id="accordion">
 							<div class="card">
 								<div class="card-header" id="headingOne">
 									<h5 class="mb-0">
-										<button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-											Game Object Class
+										<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+											Finite State Machine Component
 										</button>
 									</h5>
 								</div>
-								<div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+								<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
 									<div class="card-body">
 										<pre><code class="cpp">
-class GameObject
+class COGFSM : public Component
 {
 private:
-	std::vector<Component*> mComponents;
+	FSMState* mCurrent;
+	FSMState* mNext;
 
 public:
-	GameObject() {}
-	~GameObject() 
+	static std::vector&lt;COGFSM*> mFSMComponents;
+
+	COGFSM(GameObject* pGO) : Component(pGO), mCurrent(nullptr), mNext(nullptr) {}
+	~COGFSM() 
 	{
-		for (Component* pComponent : mComponents)
+		// Makes sure the states are cleaned
+		delete mNext;
+		delete mCurrent;
+	}
+
+	// Component funcitons
+	virtual ComponentType GetType() const { return ComponentType::FSM; }
+	virtual void Initialize() override { AddToComponentVector(mFSMComponents); }
+	virtual void Destroy() override { RemoveFromComponentVector(mFSMComponents); } 
+	
+	// Manages the state changes
+	void Initialize(FSMState* pState) 
+	{
+		assert(mCurrent == nullptr); // Terminate the program if the state machine has an initial state before we stablish one
+		mCurrent = pState;
+	}
+
+	// Assigns the next state to the FSM
+	void Next(FSMState* pState)
+	{
+		if (mCurrent != nullptr)
 		{
-			pComponent->Destroy();
-			delete pComponent;
+			delete mNext;
 		}
+		mNext = pState;
 	}
 
-	void Initialize()
+	// Runs through the game loop for that state machine
+	void Update(float fDeltaT)
 	{
-		for (Component* pComponent : mComponents)
+		// Means we have a new state to transition to
+		if (mNext != nullptr)
 		{
-			pComponent->Initialize();
+			mCurrent->OnExit(); // Runs the exit state code
+			delete mCurrent;
+
+			mCurrent = mNext;
+			mCurrent->OnEnter(); // Runs the on enter code
+
+			mNext = nullptr;
 		}
+
+		mCurrent->OnUpdate(fDeltaT);
 	}
 
-	void AddComponent(Component* pComponent)
-	{
-		mComponents.push_back(pComponent);
-	}
-
+	// Creates a New State depending on the type
 	template&lt;class T>
-	T* FindComponent(ComponentType eType)
+	T* Create()
 	{
-		for (Component* pComponent : mComponents)
-		{
-			if (pComponent->GetType() == eType)
-			{
-				return (T*)pComponent;
-			}
-		}
-
-		return nullptr;
+		return new T(this);
 	}
 };
+
+std::vector&lt;COGFSM*> COGFSM::mFSMComponents; // inits the fsm components
 										</code></pre>
 									</div>
 								</div>
@@ -202,41 +231,28 @@ public:
 							<div class="card">
 								<div class="card-header" id="headingOne">
 									<h5 class="mb-0">
-										<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-											Component Class
+										<button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+											State Class
 										</button>
 									</h5>
 								</div>
-								<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+								<div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
 									<div class="card-body">
 										<pre><code class="c++">
-	class Component
-	{
-	public:
-		Component(GameObject* pGO): mGO(pGO) {}
-		~Component() {}
-	
-		virtual ComponentType GetType() const = 0;
-		virtual void Initialize() {}
-		virtual void Destroy() {}
-	
-		GameObject* GetGameObject() const { return mGO; }
-	
-	protected:
-		GameObject* mGO;
-	
-		template&lt;class T>
-		void AddToComponentVector(std::vector<T*>& componentVector)
-		{
-			componentVector.push_back((T*)this);
-		}
-	
-		template&lt;class T>
-		void RemoveFromComponentVector(std::vector<T*>& componentVector)
-		{
-			componentVector.erase(std::remove(componentVector.begin(), componentVector.end(), this), componentVector.end());
-		}
-	};
+class FSMState
+{
+protected:
+	COGFSM* mFSM;
+
+public:
+
+	FSMState(COGFSM* pFSM) : mFSM(fFSM) {} 
+	~FSMState() {}
+
+	virtual void OnEnter() {} // Gets called when the state is entered for the first time
+	virtual void OnExit() {} // Gets called when the state is ending
+	virtual void OnUpdate(float fDeltaT) {}; // gets called every frame that the state is active
+};
 										</code></pre>
 									</div>
 								</div>
@@ -245,51 +261,59 @@ public:
 								<div class="card-header" id="headingOne">
 									<h5 class="mb-0">
 										<button class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-											Bounce Component Class
+											Specific State Class (Weapon 2 example)
 										</button>
 									</h5>
 								</div>
 								<div id="collapseThree" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
 									<div class="card-body">
-										<pre><code class="cpp">
-class COGBounce : public Component, public IPhysicsCollisionEvent
+										<pre><code class="c++">
+#define PI 3.14159265f
+#define Deg2Rad PI / 180.0f 
+#define Rad2Deg 180.0f / PI
+
+class FSMStateFire : public FSMState
 {
 public:
+	FSMStateFire(COGFSM* pFSM) {}
+	~FSMStateFire() {}
 
-	static std::vector&lt;COGBounce*> mBounceComponents;
-
-	COGBounce(GameObject* pGO) : Component(pGO) {}
-	~COGBounce() {}
-
-	virtual ComponentType GetType() const { return ComponentType::Bounce; }
-
-	virtual void Initialize() override
+	virtual void OnUpdate(float fDeltaT) override 
 	{
-		AddToComponentVector(mBounceComponents);
-		// Registers itself to the collision events
-		mGO->FindComponent&lt;COGPhysics>(ComponentType::Physics)->AddListener(this);
-	}
+		// Shoot
+		if (InputManager::GetInstance()->mMouseLeft && InputManager::GetInstance()->mMouseLeft != InputManager::GetInstance()->mMouseLeftPreviousState)
+		{
+			for (IShootEvent* pIShootEventListener : World::mShootEventListeners)
+			{
+				exColor color;
+				color.mColor[0] = 252;
+				color.mColor[1] = 115;
+				color.mColor[2] = 17;
+				color.mColor[3] = 255;
 
-	virtual void Destroy() override 
-	{
-		RemoveFromComponentVector(mBounceComponents);
-	}
+				// We get the main angle and add and substract degrees
+				exVector2 mousePos = InputManager::GetInstance()->mMousePosition;
+				exVector2 origin = mFSM->GetGameObject()->FindComponent&lt;COGLineShape>(ComponentType::LineShape)->GetOrigin();
+				exVector2 dir = Vector2::GetDirectionVector(origin, mousePos);
+				exVector2 normalizedDir = Vector2::Normalized(dir);
+				
+				// We get the angle for the other two vector
+				float angle = std::atan2(dir.y, dir.x);
+				float spread = 25.0f;
+				exVector2 bulletDown = { std::cos(angle + spread * Deg2Rad), std::sin(angle + spread * Deg2Rad) };
+				exVector2 bulletUp = { std::cos(angle - spread * Deg2Rad), std::sin(angle - spread * Deg2Rad) };
 
-	virtual void OnCollision(COGPhysics* pMe, COGPhysics* pOther, exCollision collision) override 
-	{	
-		// Changes the velocity of the ball so it bounces off the surfaces
-		exVector2& velocity = pMe->GetVelocity();
+				// Spawns 3 bullets
+				pIShootEventListener->OnBulletSpawn(normalizedDir, color);	// Center Bullet
+				pIShootEventListener->OnBulletSpawn(bulletUp, color);		// Bullet going up
+				pIShootEventListener->OnBulletSpawn(bulletDown, color);		// Bullet going down
+			}
+		}
 
-		float transformation = 2 * (velocity.x * collision.normalX + velocity.y * collision.normalY);
-		collision.normalX *= transformation;
-		collision.normalY *= transformation;
-		
-		velocity.x -= collision.normalX;
-		velocity.y -= collision.normalY;
+		// Cache Input
+		InputManager::GetInstance()->CacheInput();
 	}
 };
-// Init static vector
-std::vector&lt;COGBounce*> COGBounce::mBounceComponents;
 										</code></pre>
 									</div>
 								</div>
