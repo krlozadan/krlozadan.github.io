@@ -149,6 +149,12 @@
 								<div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
 									<div class="card-body">
 										<pre><code class="cpp">
+/*
+* Carlos Adan Cortes De la Fuente
+* All rights reserved. Copyright (c)
+* Email: dev@carlosadan.com
+*/
+
 class GameObject
 {
 private:
@@ -207,33 +213,39 @@ public:
 								<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
 									<div class="card-body">
 										<pre><code class="c++">
-	class Component
+/*
+* Carlos Adan Cortes De la Fuente
+* All rights reserved. Copyright (c)
+* Email: dev@carlosadan.com
+*/		
+
+class Component
+{
+public:
+	Component(GameObject* pGO): mGO(pGO) {}
+	~Component() {}
+
+	virtual ComponentType GetType() const = 0;
+	virtual void Initialize() {}
+	virtual void Destroy() {}
+
+	GameObject* GetGameObject() const { return mGO; }
+
+protected:
+	GameObject* mGO;
+
+	template&lt;class T>
+	void AddToComponentVector(std::vector<T*>& componentVector)
 	{
-	public:
-		Component(GameObject* pGO): mGO(pGO) {}
-		~Component() {}
-	
-		virtual ComponentType GetType() const = 0;
-		virtual void Initialize() {}
-		virtual void Destroy() {}
-	
-		GameObject* GetGameObject() const { return mGO; }
-	
-	protected:
-		GameObject* mGO;
-	
-		template&lt;class T>
-		void AddToComponentVector(std::vector<T*>& componentVector)
-		{
-			componentVector.push_back((T*)this);
-		}
-	
-		template&lt;class T>
-		void RemoveFromComponentVector(std::vector<T*>& componentVector)
-		{
-			componentVector.erase(std::remove(componentVector.begin(), componentVector.end(), this), componentVector.end());
-		}
-	};
+		componentVector.push_back((T*)this);
+	}
+
+	template&lt;class T>
+	void RemoveFromComponentVector(std::vector<T*>& componentVector)
+	{
+		componentVector.erase(std::remove(componentVector.begin(), componentVector.end(), this), componentVector.end());
+	}
+};
 										</code></pre>
 									</div>
 								</div>
@@ -249,6 +261,12 @@ public:
 								<div id="collapseThree" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
 									<div class="card-body">
 										<pre><code class="cpp">
+/*
+* Carlos Adan Cortes De la Fuente
+* All rights reserved. Copyright (c)
+* Email: dev@carlosadan.com
+*/		
+										
 class COGBounce : public Component, public IPhysicsCollisionEvent
 {
 public:
