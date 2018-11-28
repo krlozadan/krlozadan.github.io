@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Pong Project</title>
+	<meta name="description" content="C++ Pong retro game clone">
+
+	<!-- Bootstrap CSS -->
+	<link href="./css/bootstrap.min.css" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<!-- Prism JS -->
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/atom-one-dark.min.css">
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700,900" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+	<!-- owl carousel css-->
+	<link rel="stylesheet" href="./css/owl.carousel.min.css">
+	<link rel="stylesheet" href="./css/owl.theme.default.min.css">
+	<!-- magnific-popup CSS -->
+	<link rel="stylesheet" href="./css/magnific-popup.css">
+	<!-- YouTubePopUp CSS -->
+	<link rel="stylesheet" href="./css/bicon.min.css" />
+	<link rel="stylesheet" href="./css/YouTubePopUp.css">
+	<!-- Animate CSS -->
+	<link rel="stylesheet" href="./css/animate.css">
+	<!-- custom styles (optional) -->
+	<link href="./css/style.css" rel="stylesheet">
+	<link href="./css/responsive.css" rel="stylesheet">
+</head>
+
+<body>
+	<!--Loader-->
+	<div id="loader">
+		<div id="loading-center">
+			<div id="loading-center-absolute">
+				<div class="object"></div>
+				<div class="object"></div>
+				<div class="object"></div>
+				<div class="object"></div>
+				<div class="object"></div>
+				<div class="object"></div>
+				<div class="object"></div>
+				<div class="object"></div>
+				<div class="object"></div>
+				<div class="object"></div>
+			</div>
+		</div>
+	</div>
+	<!-- Loader end -->
+	<!-- ====== Navgition ======  -->
+	<nav class="navbar navbar-expand-lg fixed-top">
+		<div class="container">
+			<!-- Logo -->
+			<a class="navbar-brand pt-0 logo" href="#">
+				<img src="./img/game-programmer-logo.png" alt="Game Programmer Logo" class="logo-1">
+				<img src="./img/game-developer-logo.png" alt="Game Developer Logo" class="logo-2">
+			</a>
+			<!-- // Logo -->
+
+			<!-- Mobile Menu -->
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-expanded="false"><span><i class="fa fa-bars"></i></span></button>
+			<!-- Mobile Menu -->
+
+			<div class="collapse navbar-collapse main-menu" id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link" href="./">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="./#about">About</a></li>
+					<li class="nav-item"><a class="nav-link" href="./#resume">Resume</a></li>
+					<li class="nav-item"><a class="nav-link" href="./#skills">Skills</a></li>
+					<li class="nav-item active"><a class="nav-link" href="./#portfolio">Portfolio</a></li>
+					<li class="nav-item"><a class="nav-link" href="./#contact">Contact</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- ====== End Navgition ======  -->
+	<!-- HEADER -->
+	<div class="port-hero overlay">
+		<div class="container">
+			<div class="col-md-12">
+				<h2>Pong</h2>
+				<div class="breadcroumb">
+					Retro
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END HEADER -->
+	<!-- single portfolio section start -->
+	<div class="single-portfolio section-padding">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="owl-carousel owl-theme">
+						<div class="item-portfolio">
+							<img src="./img/portfolio/pong-game-gameplay.jpg" alt="Pong Gameplay" />
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="project-meta-wrapper">
+						<h4 class="sub-tit">Project Overview</h4>
+						<ul class="single-project-meta">
+							<li>
+								<i class="fa fa-cube"></i><span>Project Type:</span> Retro Console Game Clone
+							</li>
+							<li>
+								<i class="fa fa-user"></i><span>Role: </span> Gameplay Programmer
+							</li>
+							<li>
+								<i class="fa fa-desktop"></i><span>Software:</span> Visual Studio 2017
+							</li>
+							<li>
+								<i class="fa fa-code"></i><span>Languages:</span> C++
+							</li>
+							<li>
+								<i class="fa fa-link"></i><span>Download link:</span> <a href="https://www.dropbox.com/s/mblc46j0lbg51oa/Pong.zip?dl=0" target="_blank">Play Game</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="single-project-description">
+						<h4 class="sub-tit">Project Brief</h4>
+						<p>
+							Using <a href="https://www.linkedin.com/in/james-mansfield-69a7575/" target="_blank">James Mansfield's</a> 2D engine. This retro game clone was a very interesting project to work on because I did two iterations on it. The first one using an object oriented approach with high emphasis on how classes were related to each other. The second one was using a <strong>component-based system</strong> to build independent and interchangeable modules.
+						</p>
+						<br>
+						<h4 class="sub-tit">Responsibilities/Achievements</h4>
+                        <ul>
+							<li>- Implement a Component Base System to drive all game logic by analyzing every object and abstracting its properties and behavours</li>
+							<li>- Calculate the collision between a circle and a box to determine the ball's bounce direction</li>
+							<li>- Use pure virtual functions to create en event-driven system to connect game entities, i.e. physics component with bounce component</li>
+						</ul>
+						<h4 class="sub-tit">Code Smaples</h4>
+						<div id="accordion">
+							<div class="card">
+								<div class="card-header" id="headingOne">
+									<h5 class="mb-0">
+										<button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+											Game Object Class
+										</button>
+									</h5>
+								</div>
+								<div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+									<div class="card-body">
+										<pre><code class="cpp">
+/*
+* Carlos Adan Cortes De la Fuente
+* All rights reserved. Copyright (c)
+* Email: dev@carlosadan.com
+*/
+
+class GameObject
+{
+private:
+	std::vector&lt;Component*> mComponents;
+
+public:
+	GameObject() {}
+	~GameObject() 
+	{
+		for (Component* pComponent : mComponents)
+		{
+			pComponent->Destroy();
+			delete pComponent;
+		}
+	}
+
+	void Initialize()
+	{
+		for (Component* pComponent : mComponents)
+		{
+			pComponent->Initialize();
+		}
+	}
+
+	void AddComponent(Component* pComponent)
+	{
+		mComponents.push_back(pComponent);
+	}
+
+	template&lt;class T>
+	T* FindComponent(ComponentType eType)
+	{
+		for (Component* pComponent : mComponents)
+		{
+			if (pComponent->GetType() == eType)
+			{
+				return (T*)pComponent;
+			}
+		}
+
+		return nullptr;
+	}
+};
+										</code></pre>
+									</div>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" id="headingOne">
+									<h5 class="mb-0">
+										<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+											Component Class
+										</button>
+									</h5>
+								</div>
+								<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+									<div class="card-body">
+										<pre><code class="c++">
+/*
+* Carlos Adan Cortes De la Fuente
+* All rights reserved. Copyright (c)
+* Email: dev@carlosadan.com
+*/		
+
+class Component
+{
+public:
+	Component(GameObject* pGO): mGO(pGO) {}
+	~Component() {}
+
+	virtual ComponentType GetType() const = 0;
+	virtual void Initialize() {}
+	virtual void Destroy() {}
+
+	GameObject* GetGameObject() const { return mGO; }
+
+protected:
+	GameObject* mGO;
+
+	template&lt;class T>
+	void AddToComponentVector(std::vector<T*>& componentVector)
+	{
+		componentVector.push_back((T*)this);
+	}
+
+	template&lt;class T>
+	void RemoveFromComponentVector(std::vector<T*>& componentVector)
+	{
+		componentVector.erase(std::remove(componentVector.begin(), componentVector.end(), this), componentVector.end());
+	}
+};
+										</code></pre>
+									</div>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" id="headingOne">
+									<h5 class="mb-0">
+										<button class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+											Bounce Component Class
+										</button>
+									</h5>
+								</div>
+								<div id="collapseThree" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+									<div class="card-body">
+										<pre><code class="cpp">
+/*
+* Carlos Adan Cortes De la Fuente
+* All rights reserved. Copyright (c)
+* Email: dev@carlosadan.com
+*/		
+										
+class COGBounce : public Component, public IPhysicsCollisionEvent
+{
+public:
+
+	static std::vector&lt;COGBounce*> mBounceComponents;
+
+	COGBounce(GameObject* pGO) : Component(pGO) {}
+	~COGBounce() {}
+
+	virtual ComponentType GetType() const { return ComponentType::Bounce; }
+
+	virtual void Initialize() override
+	{
+		AddToComponentVector(mBounceComponents);
+		// Registers itself to the collision events
+		mGO->FindComponent&lt;COGPhysics>(ComponentType::Physics)->AddListener(this);
+	}
+
+	virtual void Destroy() override 
+	{
+		RemoveFromComponentVector(mBounceComponents);
+	}
+
+	virtual void OnCollision(COGPhysics* pMe, COGPhysics* pOther, exCollision collision) override 
+	{	
+		// Changes the velocity of the ball so it bounces off the surfaces
+		exVector2& velocity = pMe->GetVelocity();
+
+		float transformation = 2 * (velocity.x * collision.normalX + velocity.y * collision.normalY);
+		collision.normalX *= transformation;
+		collision.normalY *= transformation;
+		
+		velocity.x -= collision.normalX;
+		velocity.y -= collision.normalY;
+	}
+};
+// Init static vector
+std::vector&lt;COGBounce*> COGBounce::mBounceComponents;
+										</code></pre>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="single-project-link">
+						<a href="./#portfolio" class="project-link prev-project"><i class="fa fa-angle-left"> back to projects</i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- single portfolio section end -->
+	<footer>
+		<div class="container">
+			<div class="row">
+				<h3>Contact Details</h3>
+				<ul class="footer-info">
+					<li><i class="fa fa-phone"></i>+52 1 722-4043176</li>
+					<li><i class="fa fa-envelope"></i>dev@carlosadan.com<li>
+				</ul>
+				<div class="social-icon">
+					<a href="https://www.linkedin.com/in/carlos-adan-cortes-de-la-fuente-20777356/" target="_blank"><span><i class="fa fa-linkedin" aria-hidden="true"></i></span></a>
+					<a href="https://github.com/krlozadan" target="_blank"><span><i class="fa fa-github" aria-hidden="true"></i></span></a>
+					<a href="https://twitter.com/krlozadan" target="_blank"><span><i class="fa fa-twitter" aria-hidden="true"></i></span></a>
+				</div>
+				<img src="./img/game-developer-logo.png" alt="Game Developer Logo">
+			</div>
+			<!-- ./ Row -->
+		</div>
+		<!-- ./ Container -->
+		<div class="rights">
+			<p>©2018 Carlos Adan. All Rights Reserved.</p>
+		</div>
+	</footer>
+	<!-- ======./ Footer ======  -->
+	<!-- Optional JavaScript -->
+	<script src="./js/jquery-3.1.1.min.js"></script>
+	<script src="./js/Migrate.js"></script>
+	<script src="./js/bootstrap.min.js"></script>
+	<!-- scrollIt js -->
+	<script src="./js/scrollIt.min.js"></script>
+	<!-- owl carousel js -->
+	<script src="./js/owl.carousel.min.js"></script>
+	<!-- jquery.counterup.min js -->
+	<script src="./js/jquery.counterup.min.js"></script>
+	<!-- typed -->
+	<script src="./js/typed.js"></script>
+	<!-- magnific-popup -->
+	<script src="./js/jquery.magnific-popup.min.js"></script>
+	<!-- isotope.pkgd.min js -->
+	<script src="./js/isotope.pkgd.min.js"></script>
+	<!-- jquery.waypoints.min js -->
+	<script src="./js/jquery.waypoints.min.js"></script>
+	<script src="./js/wow.js"></script>
+	<!-- jquery barfiller js -->
+	<script src="./js/jquery.barfiller.js"></script>
+	<!-- jquery matchHeight -->
+	<script src="./js/jquery.matchHeight-min.js"></script>
+	<script src="./js/background-effect.js"></script>
+	<!-- validator js -->
+	<script src="./js/validator.js"></script>
+	<!-- ====== gmap3 js ======= -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJ_mGhah8EApmFiXYYBsdBuygviP2M2EE"></script>
+	<script src="./js/gmap3.min.js"></script>
+	<!-- ====== Highlight JS ======= -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+	<!-- custom JavaScript -->
+	<script src="./js/custom.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+</body>
+
+</html>

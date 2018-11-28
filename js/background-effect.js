@@ -15,17 +15,19 @@
         if (largeHeader != null) largeHeader.style.height = height+'px';
 
         canvas = document.getElementById('background-effect');
-        canvas.width = width;
-        canvas.height = height;
-        ctx = canvas.getContext('2d');
-
-        // create particles
-        circles = [];
-        for(var x = 0; x < width*0.2; x++) {
-            var c = new Circle();
-            circles.push(c);
+        if (canvas != null) {
+            canvas.width = width;
+            canvas.height = height;
+            ctx = canvas.getContext('2d');
+    
+            // create particles
+            circles = [];
+            for(var x = 0; x < width*0.2; x++) {
+                var c = new Circle();
+                circles.push(c);
+            }
+            animate();
         }
-        animate();
     }
 
     // Event handling
