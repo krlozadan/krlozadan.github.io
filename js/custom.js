@@ -241,19 +241,24 @@ $(function () {
 
     // when the form is submitted
     $('#contact-form').on('submit', function (e) {
-
         // if the validator does not prevent form submit
         if (!e.isDefaultPrevented()) {
-            var url = "contact.php";
-
+            
+            var url = "https://wt-f6dd18b324b1fd538f48a9c80ae2b287-0.sandbox.auth0-extend.com/EmailFromPortfolioWebsite";
+            
+            // Prepare data as JSON To be sent
+            let dataArray = $(this).serializeArray();
+            let dataObject = {};
+            dataArray.forEach(data => dataObject[data.name] = data.value);
+            
             // POST values in the background the the script URL
             $.ajax({
                 type: "POST",
                 url: url,
-                data: $(this).serialize(),
-                success: function (data) {
-                    // data = JSON object that contact.php returns
-
+                data: JSON.stringify(dataObject),
+                contentType : 'application/json',
+                dataType : 'json',
+                success: function (data, textStatus, jqXHR) {
                     // we recieve the type of the message: success x danger and apply it to the 
                     var messageAlert = 'alert-' + data.type;
                     var messageText = data.message;
